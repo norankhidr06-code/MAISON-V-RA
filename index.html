@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAISON VÉRA — Le Sac Baguette | 360° Product Showcase</title>
+  <meta name="description" content="Experience MAISON VÉRA's flagship Le Sac Baguette in an interactive 360-degree high-definition showcase with precision Italian craftsmanship.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader" class="preloader">
+    <div class="loader-content">
+      <div class="brand-emblem">M V</div>
+      <h1 class="loader-title">MAISON VÉRA</h1>
+      <p class="loader-subtitle">LE SAC BAGUETTE — PURPLE EDITION</p>
+      
+      <div class="progress-bar-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      
+      <div class="loader-status">
+        <span id="progress-text">0%</span>
+        <span id="progress-count">Preparing 360° Studio...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Studio Ambient Backdrop -->
+  <div class="studio-backdrop">
+    <div class="studio-glow"></div>
+    <div class="studio-grid"></div>
+  </div>
+
+  <!-- Fullscreen Responsive Canvas -->
+  <canvas id="product-canvas"></canvas>
+
+  <!-- Interactive Canvas Hotspots Layer -->
+  <div id="hotspots-layer" class="hotspots-layer">
+    <!-- Hotspot 1: Leather -->
+    <div class="hotspot" data-section="craft" style="top: 52%; left: 62%;">
+      <div class="hotspot-pulse"></div>
+      <div class="hotspot-dot"></div>
+      <div class="hotspot-card">
+        <span class="hotspot-tag">Material</span>
+        <h4>Full-Grain Calfskin</h4>
+        <p>Supple Italian leather with water-repellent finish & subtle natural patina.</p>
+      </div>
+    </div>
+
+    <!-- Hotspot 2: Hardware -->
+    <div class="hotspot" data-section="hardware" style="top: 45%; left: 74%;">
+      <div class="hotspot-pulse"></div>
+      <div class="hotspot-dot"></div>
+      <div class="hotspot-card">
+        <span class="hotspot-tag">Detail</span>
+        <h4>24K Gold Hardware</h4>
+        <p>Hand-polished brass rivets & engraved insignia zipper pulls.</p>
+      </div>
+    </div>
+
+    <!-- Hotspot 3: Handle -->
+    <div class="hotspot" data-section="interior" style="top: 32%; left: 65%;">
+      <div class="hotspot-pulse"></div>
+      <div class="hotspot-dot"></div>
+      <div class="hotspot-card">
+        <span class="hotspot-tag">Ergonomics</span>
+        <h4>Sculpted Handles</h4>
+        <p>Dual reinforced drop-handles for effortless hand or crook-of-arm carry.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Header -->
+  <header class="header">
+    <div class="logo">
+      <span class="logo-symbol">❖</span>
+      <span class="logo-text">MAISON VÉRA</span>
+    </div>
+    
+    <nav class="nav-links">
+      <button class="nav-link active" onclick="scrollToSection(0)">Overview</button>
+      <button class="nav-link" onclick="scrollToSection(0.25)">Craftsmanship</button>
+      <button class="nav-link" onclick="scrollToSection(0.55)">Hardware</button>
+      <button class="nav-link" onclick="scrollToSection(0.80)">Interior</button>
+      <button class="nav-link" onclick="toggleSpecsModal(true)">Specifications</button>
+    </nav>
+
+    <div class="header-actions">
+      <button class="sound-toggle-btn" id="sound-btn" title="Toggle Audio Feedback">
+        <svg class="sound-icon sound-off" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M3.63 3.63a.996.996 0 000 1.41L7.29 8.7 7 9H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71v-4.17l4.18 4.18c-.49.37-1.02.68-1.6.91-.34.13-.58.46-.58.82 0 .55.51.98 1.04.8 1.04-.37 1.99-.96 2.8-1.7l1.72 1.72a.996.996 0 101.41-1.41L5.04 3.63a.996.996 0 00-1.41 0zM19 12c0 .82-.15 1.61-.41 2.34l1.53 1.53c.56-1.17.88-2.48.88-3.87 0-3.83-2.4-7.11-5.78-8.4-.52-.2-1.07.2-1.07.76 0 .42.27.78.67.92C17.48 6.44 19 8.99 19 12zm-4.5 0c0-.86-.25-1.66-.68-2.33l1.53 1.53c.1.26.15.53.15.8 0 1.25-.62 2.35-1.57 3.03-.35.25-.43.74-.18 1.09.25.35.74.43 1.09.18A5.474 5.474 0 0014.5 12zM12 4.71v3.17l2.57 2.57V4.71c0-.89-1.08-1.34-1.71-.71L12 4.71z"/></svg>
+        <svg class="sound-icon sound-on hidden" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+      </button>
+      <button class="cta-btn" onclick="scrollToSection(1)">Reserve Now — $2,450</button>
+    </div>
+  </header>
+
+  <!-- Virtual Scroll Space & Story Overlays -->
+  <main class="scroll-wrapper" id="scroll-wrapper">
+    
+    <!-- Hero Overlay -->
+    <section class="story-section active" data-index="0">
+      <div class="story-content hero-content">
+        <span class="story-badge">SPRING/SUMMER 2026</span>
+        <h2 class="story-title">LE SAC BAGUETTE</h2>
+        <p class="story-description">An iconic silhouette sculpted in royal purple calfskin leather, designed for effortless elegance and timeless sophistication.</p>
+        
+        <div class="hero-highlights">
+          <div class="highlight-item">
+            <span class="highlight-val">100%</span>
+            <span class="highlight-lbl">Italian Leather</span>
+          </div>
+          <div class="highlight-divider"></div>
+          <div class="highlight-item">
+            <span class="highlight-val">24K</span>
+            <span class="highlight-lbl">Gold Plated</span>
+          </div>
+          <div class="highlight-divider"></div>
+          <div class="highlight-item">
+            <span class="highlight-val">360°</span>
+            <span class="highlight-lbl">Crafted Precision</span>
+          </div>
+        </div>
+
+        <div class="scroll-prompt">
+          <div class="mouse-icon">
+            <div class="mouse-wheel"></div>
+          </div>
+          <span>Scroll down for 360° Showcase</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Craftsmanship Overlay -->
+    <section class="story-section" data-index="1">
+      <div class="story-content card-left">
+        <span class="story-badge">01 / ARCHITECTURE</span>
+        <h3 class="story-heading">Handcrafted Perfection</h3>
+        <p class="story-text">Every panel of Le Sac Baguette is precision hand-cut by master artisans in Florence. The subtle violet grain absorbs light to highlight its organic silhouette.</p>
+        <ul class="feature-list">
+          <li>✨ Double-reinforced edge stitching</li>
+          <li>✨ Soft satin protective coating</li>
+          <li>✨ Structured base with protective brass feet</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Hardware Overlay -->
+    <section class="story-section" data-index="2">
+      <div class="story-content card-right">
+        <span class="story-badge">02 / EMBELLISHMENTS</span>
+        <h3 class="story-heading">Signature 24K Hardware</h3>
+        <p class="story-text">Featuring bespoke gold-plated hardware and custom zipper pulls embossed with the Maison Véra crest for smooth action and unmatched longevity.</p>
+        <div class="spec-pill-group">
+          <span class="spec-pill">Scratch-Resistant</span>
+          <span class="spec-pill">Gold Electroplated</span>
+          <span class="spec-pill">Laser Engraved</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interior Overlay -->
+    <section class="story-section" data-index="3">
+      <div class="story-content card-left">
+        <span class="story-badge">03 / FUNCTIONALITY</span>
+        <h3 class="story-heading">Thoughtful Interior Space</h3>
+        <p class="story-text">Lined with lush Italian micro-suede, offering dual zip pockets, a smartphone holster, and magnetic snap closure to keep your essentials secure.</p>
+        <div class="dimension-box">
+          <div class="dim-col"><span>Width</span><strong>28 cm</strong></div>
+          <div class="dim-col"><span>Height</span><strong>18 cm</strong></div>
+          <div class="dim-col"><span>Depth</span><strong>12 cm</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call To Action Overlay -->
+    <section class="story-section" data-index="4">
+      <div class="story-content card-center">
+        <span class="story-badge">LIMITED EDITION</span>
+        <h2 class="story-title-large">Own a Masterpiece</h2>
+        <p class="story-text-center">Strictly limited to 500 numbered pieces worldwide. Includes custom dust bag and certificate of authenticity.</p>
+        
+        <div class="cta-actions">
+          <button class="cta-primary-btn" onclick="openOrderModal()">Reserve Your Baguette — $2,450</button>
+          <button class="cta-secondary-btn" onclick="toggleSpecsModal(true)">View Technical Specs</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating Controls Bar -->
+  <div class="controls-bar">
+    <div class="control-group">
+      <button class="control-btn active" id="mode-scroll-btn" title="Scroll View Mode">
+        <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2C8.14 2 5 5.14 5 9v6c0 3.86 3.14 7 7 7s7-3.14 7-7V9c0-3.86-3.14-7-7-7zm5 13c0 2.76-2.24 5-5 5s-5-2.24-5-5V9c0-2.76 2.24-5 5-5s5 2.24 5 5v6zm-6-8h2v4h-2V7z"/></svg>
+        <span>Scroll</span>
+      </button>
+
+      <button class="control-btn" id="mode-drag-btn" title="Drag to Rotate Mode">
+        <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M13 1.07V4.07C16.89 4.56 20 7.92 20 12C20 14.08 19.2 15.97 17.89 17.41L20.03 19.55C21.86 17.58 23 14.93 23 12C23 6.32 18.66 1.61 13 1.07M11 1.07C5.34 1.61 1 6.32 1 12C1 14.93 2.14 17.58 3.97 19.55L6.11 17.41C4.8 15.97 4 14.08 4 12C4 7.92 7.11 4.56 11 4.07V1.07M12 6C8.69 6 6 8.69 6 12C6 13.66 6.67 15.16 7.76 16.24L9.17 14.83C8.44 14.1 8 13.1 8 12C8 9.79 9.79 8 12 8C14.21 8 16 9.79 16 12C16 13.1 15.56 14.1 14.83 14.83L16.24 16.24C17.33 15.16 18 13.66 18 12C18 8.69 15.31 6 12 6Z"/></svg>
+        <span>360° Drag</span>
+      </button>
+
+      <button class="control-btn" id="auto-spin-btn" title="Auto Spin Animation">
+        <svg class="play-icon" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+        <svg class="pause-icon hidden" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        <span>Auto Play</span>
+      </button>
+    </div>
+
+    <div class="control-divider"></div>
+
+    <div class="angle-badge" id="angle-badge">
+      <span class="angle-icon">↻</span>
+      <span id="angle-value">0°</span>
+      <span class="frame-tag" id="frame-tag">1 / 174</span>
+    </div>
+
+    <div class="control-divider"></div>
+
+    <button class="control-icon-btn" id="reset-view-btn" title="Reset View" onclick="scrollToSection(0)">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+    </button>
+  </div>
+
+  <!-- Specifications Modal -->
+  <div id="specs-modal" class="modal-overlay">
+    <div class="modal-card">
+      <button class="modal-close" onclick="toggleSpecsModal(false)">&times;</button>
+      <div class="modal-header">
+        <span class="story-badge">MAISON VÉRA</span>
+        <h3>Technical Specifications</h3>
+      </div>
+
+      <div class="specs-grid">
+        <div class="spec-row">
+          <span class="spec-label">Model</span>
+          <span class="spec-value">Le Sac Baguette — Violet Edition</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Material</span>
+          <span class="spec-value">100% Full-Grain Italian Calfskin</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Lining</span>
+          <span class="spec-value">Ultra-Soft Italian Micro-Suede</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Hardware</span>
+          <span class="spec-value">24K Gold Electroplated Solid Brass</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Dimensions</span>
+          <span class="spec-value">28cm (L) × 18cm (H) × 12cm (W)</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Strap Drop</span>
+          <span class="spec-value">22cm Handle Drop / Removable Crossbody Strap</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Weight</span>
+          <span class="spec-value">680g (Ultra-Lightweight Structured Frame)</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Origin</span>
+          <span class="spec-value">Handcrafted in Florence, Italy</span>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="cta-primary-btn full-width" onclick="openOrderModal()">Reserve Baguette ($2,450)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
